@@ -3,6 +3,8 @@ from gensim.models.keyedvectors import KeyedVectors
 from gensim import models
 import numpy as np
 from sklearn.manifold import TSNE
+from  sklearn.metrics.pairwise import cosine_similarity
+from  sklearn.metrics.pairwise import cosine_distances
 import matplotlib.pyplot as plt
 import pandas as pd
 from stop_words import get_stop_words
@@ -65,17 +67,24 @@ def plot_wor2vec(model):
 
 def compare_models(model1, model2):
     """as an input provide two pandas dataframes"""
-    df = pd.DataFrame(columns=["word", "cos_distance"])
+    df = pd.DataFrame(columns=["word", "distance"])
     for q in model1.index:
         if model1["word"][q] in model2["word"].values:
-            print(model1["word"][q])
+            vec1 = model1.iloc[q, 1:302].to_numpy()
+            vec1 = vec1.reshape(1, 300)
+            vec2 = model2.iloc[model2[model2["word"] == model1["word"][q]].index.values[0], 1:302].to_numpy()
+            vec2 = vec2.reshape(1, 300)
+            dist = cosine_distances(vec1, vec2)
+            df = df.append({"word": model1["word"][q],
+                              "distance": dist[0][0]}, ignore_index=True)
 
+    print(df)
 
 if __name__ == "__main__":
-    glove_model = load_word2vec("D:\\projects\\inf_retrieval\\datasets\\glove\\gensim_glove_vectors.txt", 200000) #lim=200000
+    glove_model = load_word2vec("D:\\projects\\inf_retrieval\\datasets\\glove\\gensim_glove_vectors.txt", 150) #lim=200000
     glove_no_stopwords = convert_to_pandas_remove_stopwords(glove_model)
 
-    levy_model = load_word2vec("D:\\projects\\inf_retrieval\\datasets\\levy\\HistoLevy.txt", 78041) #lim=78041
+    levy_model = load_word2vec("D:\\projects\\inf_retrieval\\datasets\\levy\\HistoLevy.txt", 150) #lim=78041
     levy_no_stopwords = convert_to_pandas_remove_stopwords(levy_model)
 
     compare_models(levy_no_stopwords, glove_no_stopwords)
