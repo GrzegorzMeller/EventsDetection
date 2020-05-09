@@ -79,12 +79,14 @@ def compare_models(model1, model2):
                               "distance": dist[0][0]}, ignore_index=True)
 
     print(df)
+    df.sort_values(by=["distance"], ascending=False).head(5000).plot(kind='bar', x='word', y='distance')
+    plt.show()
 
 if __name__ == "__main__":
-    glove_model = load_word2vec("D:\\projects\\inf_retrieval\\datasets\\glove\\gensim_glove_vectors.txt", 150) #lim=200000
+    glove_model = load_word2vec("D:\\projects\\inf_retrieval\\datasets\\glove\\gensim_glove_vectors.txt", 5000) #lim=200000
     glove_no_stopwords = convert_to_pandas_remove_stopwords(glove_model)
 
-    levy_model = load_word2vec("D:\\projects\\inf_retrieval\\datasets\\levy\\HistoLevy.txt", 150) #lim=78041
+    levy_model = load_word2vec("D:\\projects\\inf_retrieval\\datasets\\levy\\HistoLevy.txt", 5000) #lim=78041
     levy_no_stopwords = convert_to_pandas_remove_stopwords(levy_model)
 
     compare_models(levy_no_stopwords, glove_no_stopwords)
