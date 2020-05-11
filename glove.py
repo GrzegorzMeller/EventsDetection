@@ -21,7 +21,7 @@ def load_word2vec(file_path ,lim):
     return glove_model
 
 
-def compare_simmilar(w, model):
+def compare_simmilar(model, w):
     """as an input provide word2vec"""
     print(model.most_similar(w))
 
@@ -81,6 +81,7 @@ def compare_models(model1, model2):
     print(df)
     df.sort_values(by=["distance"], ascending=False).head(5000).plot(kind='bar', x='word', y='distance')
     plt.show()
+
 
 if __name__ == "__main__":
     glove_model = load_word2vec("D:\\projects\\inf_retrieval\\datasets\\glove\\gensim_glove_vectors.txt", 5000) #lim=200000
