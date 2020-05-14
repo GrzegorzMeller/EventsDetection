@@ -1,20 +1,24 @@
 import sklearn_crfsuite
 from sklearn_crfsuite import scorers
 from sklearn_crfsuite import metrics
+from sklearn.metrics import make_scorer
 
 def create_tuple_list(file_path):
     '''input file should be in bio format'''
     tuple_list = []
     sentence = []
-    doc = open(file_path, "r")
+    doc = open(file_path, "r", encoding="utf8")
+    iterator = 1
     for line in doc:
         if line.strip():
+            #print(str(iterator)+" "+line)
             words = line.split()
             t = (words[0], words[2], words[5])
             sentence.append(t)
         else:
             tuple_list.append(sentence)
             sentence = []
+        iterator += 1
     return tuple_list
 
 
@@ -78,9 +82,7 @@ if __name__ == "__main__":
     #get_text()]
 
     tuple_list_train = create_tuple_list("D:\\projects\\inf_retrieval\\datasets\\bio_mention\\train.txt")
-    tuple_list_dev = create_tuple_list("D:\\projects\\inf_retrieval\\datasets\\bio_mention\\dev.txt")
-    print(tuple_list_dev[1])
-    print(sent2features(tuple_list_dev[1])[1])
+    tuple_list_dev = create_tuple_list("D:\\projects\\inf_retrieval\\datasets\\bio_mention\\test.txt")
 
     X_train = [sent2features(s) for s in tuple_list_train]
     y_train = [sent2labels(s) for s in tuple_list_train]
@@ -97,8 +99,10 @@ if __name__ == "__main__":
     )
     crf.fit(X_train, y_train)
 
-    labels = ['B-EVENT_MENTION', 'I-EVENT_MENTION']
+    labels = list(crf.classes_)
     y_pred = crf.predict(X_test)
-    m = metrics.flat_f1_score(y_test, y_pred,
-                          average='weighted', labels=labels)
-    print(m)
+
+    f1 = metrics.flat_f1_score(y_test, y_pred, average='weighted', labels=labels[1:])
+    detailed_metrics = metrics.flat_classification_report(y_test, y_pred, labels=labels[1:], digits=3)
+    print(f1)
+    print(detailed_metrics)
