@@ -33,11 +33,11 @@ def create_tags_txt(file_path, new_name):
 
 
 if __name__ == "__main__":
-    #create_words_txt("D:\\projects\\inf_retrieval\\datasets\\bio_class\\train.txt", "train")
-    #create_words_txt("D:\\projects\\inf_retrieval\\datasets\\bio_class\\test.txt", "test")
+    create_words_txt("D:\\projects\\inf_retrieval\\datasets\\bio_class\\train.txt", "train")
+    create_words_txt("D:\\projects\\inf_retrieval\\datasets\\bio_class\\test.txt", "test")
 
-    #create_tags_txt("D:\\projects\\inf_retrieval\\datasets\\bio_class\\train.txt", "train")
-    #create_tags_txt("D:\\projects\\inf_retrieval\\datasets\\bio_class\\test.txt", "test")
+    create_tags_txt("D:\\projects\\inf_retrieval\\datasets\\bio_class\\train.txt", "train")
+    create_tags_txt("D:\\projects\\inf_retrieval\\datasets\\bio_class\\test.txt", "test")
 
     create_tags_txt("D:\\projects\\inf_retrieval\\datasets\\bio_mention\\dev.txt", "dev")
     create_tags_txt("D:\\projects\\inf_retrieval\\datasets\\bio_mention\\train.txt", "train")
