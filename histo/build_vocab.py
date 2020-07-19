@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
     print('Build vocab tags (may take a while)')
     vocab_tags = set()
-    with Path(tags("D:\\projects\\inf_retrieval\\datasets\\bio_class\\train")).open(encoding="utf8") as f:
+    with Path(tags("D:\\projects\\inf_retrieval\\datasets\\bio_mention\\train")).open(encoding="utf8") as f:
         for line in f:
             vocab_tags.update(line.strip().split())
 

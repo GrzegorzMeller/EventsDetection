@@ -1,6 +1,4 @@
-import numpy as np
-from glove import load_word2vec
-from glove import convert_to_pandas_remove_stopwords
+from histo.glove import load_word2vec
 import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
 import pandas as pd

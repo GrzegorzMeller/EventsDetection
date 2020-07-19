@@ -79,8 +79,6 @@ def sent2tokens(sent):
 
 
 if __name__ == "__main__":
-    #get_text()]
-
     tuple_list_train = create_tuple_list("D:\\projects\\inf_retrieval\\datasets\\bio_mention\\train.txt")
     tuple_list_dev = create_tuple_list("D:\\projects\\inf_retrieval\\datasets\\bio_mention\\test.txt")
 
@@ -103,6 +101,9 @@ if __name__ == "__main__":
     y_pred = crf.predict(X_test)
 
     f1 = metrics.flat_f1_score(y_test, y_pred, average='weighted', labels=labels[1:])
+    rec = metrics.flat_recall_score(y_test, y_pred, average='weighted', labels=labels[1:])
+    precc = metrics.flat_precision_score(y_test, y_pred, average='weighted', labels=labels[1:])
+    #acc = metrics.flat_accuracy_score(y_test, y_pred, average='weighted', labels=labels[1:])
     detailed_metrics = metrics.flat_classification_report(y_test, y_pred, labels=labels[1:], digits=3)
-    print(f1)
+    print(f1, rec, precc)
     print(detailed_metrics)
