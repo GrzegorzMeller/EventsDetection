@@ -8,6 +8,6 @@ histo_processing - preprocessing data and running CRF classifier \
 data_prepeocessing_lstm.py - preprocess BIO data to the needed format for LSTM network \
 bulid_glove.py and build_vocab.py and glove.py - builds necessary datasets for LSTM network \
 NER_LSTM.ipynb - implementation of the LSTM network model in Tensorflow by  Guillaum Genthail (https://github.com/guillaumegenthial/tf_ner). Due to the problems with installation of Tensorflow on own PC, code is moved to the Google Colab that retrieves zip file from Google Drive and saves the model in the Google Drive  \
-NER_LSTM_EVALUATION.ipynb - takes test set and outputs predictions \
-evaluate_predictions.py - takes the output file of NER_LSTM_EVALUATION.ipynb and evaluates precision, recall and f1 score
+NER_LSTM_EVALUATION.ipynb - takes any sentence and outputs predictions \
+evaluate_predictions.py - takes the output file of NER_LSTM.ipynb and evaluates precision, recall and f1 score
 
